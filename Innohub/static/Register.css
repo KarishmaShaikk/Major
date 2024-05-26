@@ -1,0 +1,47 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+h1 {
+    color: #2e2525;
+    margin-bottom: 0; /* Remove default margin for h1 */
+}
+
+.registration-container {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px; /* Adjust the margin as needed */
+}
+
+.role-message {
+    margin-bottom: 20px;
+    color: #666;
+}
+
+.register-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-decoration: none;
+    color: #110f0f;
+    background-color: #a64b3d;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.register-btn:hover {
+    background-color: #aab1b6;
+}

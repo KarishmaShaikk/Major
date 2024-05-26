@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrepreneur's Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("{{ url_for('static', filename='enthome.avif') }}");
+            background-size: cover; /* Ensure the background image covers the entire viewport */
+            background-repeat: no-repeat; /* Prevent the background image from repeating */
+            margin: 0;
+            padding: 0;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+  .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px; /* Add some margin below the header */
+        }
+
+        .profile-box {
+            position: absolute;
+            top: 20px; /* Adjust as needed */
+            right: 20px; /* Adjust as needed */
+            display: flex;
+            align-items: center;
+        }
+
+        .profile-box img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+
+        .edit-lean-canvas {
+            margin-top: 10px;
+            margin-right: 20px;
+        }
+
+        .edit-lean-canvas button {
+            background-color: #c98ffa;
+            color: #f8f6f6;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            height: 50px;
+        }
+        .welcome-text {
+            text-align: left; /* Align welcome text to the left */
+        }
+
+        h2, h3 {
+            text-align: left; /* Align headings to the left */
+            margin-bottom: 20px; /* Add some margin below headings */
+        }
+
+        .dropdown {
+            display: inline-block; /* Make dropdown inline */
+            margin-left: 20px; /* Add some margin to the left of the dropdown */
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin-bottom: 20px;
+        }
+
+        strong {
+            font-weight: bold;
+        }
+
+        /* Custom styles for the cards */
+        .card {
+            border: none;
+            background-color: #f3b5ce;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            height: 200px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-body {
+            color: #000; /* Black text */
+        }
+
+        .btn-primary {
+            background-color: #010b17 !important; /* Blue button */
+        }
+
+        .btn-success {
+            background-color: #c98ffa !important; /* Green button */
+        }
+
+        .budget-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .investor-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+
+        .card-text {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="header">
+
+
+
+            <div class="profile-box">
+
+                <div class="edit-lean-canvas">
+                    <button><a href="/genrate">Generate Lean Canvas</a></button>
+                </div>
+                <a href="/Eprofile">
+                    <img src="{{ url_for('static', filename='entproficon.jpg') }}" alt="Profile">
+                </a>
+            </div>
+        </div>
+
+        <h2 class="welcome-text">WELCOME {{person.name }}!</h2>
+        <h2>Wanna connect with Investors? Here's who you can talk to!</h2>
+<div> </div>
+        <h3>All Investors</h3>
+
+         <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    Filter
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="filterDropdown">
+                    <li><a class="dropdown-item" href="#" id="filterBudget">Budget</a></li>
+                    <li><a class="dropdown-item" href="#" id="filterAll">All</a></li>
+                </ul>
+                <a href="/room" class="btn btn-primary">Join Room</a>
+            </div>
+        <div class="container mt-4">
+            <div class="row" id="investor-cards">
+                <!-- Investor cards will be dynamically added here -->
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap cards for displaying investor details -->
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Your custom JavaScript -->
+    <script>
+        // Function to render investor cards based on filter
+        function renderInvestors(filter) {
+            var investorCards = '';
+            if (filter === 'Budget') {
+                {% for investor_id in investors %}
+                    {% if investors[investor_id].budget|int >= person.budget|int %}
+                        investorCards += `
+                        <div class="col-md-4">
+                            <div class="card">
+
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <a href="#" onclick="submitForm('{{ investor_id }}')">{{ investors[investor_id].firstname }} {{ investors[investor_id].lastname }}</a>
+                                    </h5>
+                                    <form id="profileForm" action="/SIProfile" method="POST" style="display: none;">
+                                        <input type="hidden" id="inv_id_input" name="investor_id">
+                                    </form>
+                                    <p class="card-text">{{ investors[investor_id].email }}</p>
+                                    <p class="card-text"><strong>Interests:</strong> {{ investors[investor_id].interests }}</p>
+                                    <p class="card-text"><strong>Budget:</strong> {{ investors[investor_id].budget }}</p>
+                               </div>
+                            </div>
+                        </div>
+                    `;
+                    {% endif %}
+                {% endfor %}
+            } else if (filter === 'All') {
+                {% for investor_id in investors %}
+                    investorCards += `
+                        <div class="col-md-4">
+                            <div class="card">
+
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <a href="#" onclick="submitForm('{{ investor_id }}')">{{ investors[investor_id].firstname }} {{ investors[investor_id].lastname }}</a>
+                                    </h5>
+                                    <form id="profileForm" action="/SIProfile" method="POST" style="display: none;">
+                                        <input type="hidden" id="inv_id_input" name="investor_id">
+                                    </form>
+                                    <p class="card-text">{{ investors[investor_id].email }}</p>
+                                    <p class="card-text"><strong>Interests:</strong> {{ investors[investor_id].interests }}</p>
+                                    <p class="card-text"><strong>Budget:</strong> {{ investors[investor_id].budget }}</p>
+                                    </div>
+                            </div>
+                        </div>
+                    `;
+                {% endfor %}
+            }
+            document.getElementById('investor-cards').innerHTML = investorCards;
+        }
+
+        // Event listener for Budget filter
+        document.getElementById('filterBudget').addEventListener('click', function() {
+            renderInvestors('Budget');
+        });
+
+        // Event listener for All filter
+        document.getElementById('filterAll').addEventListener('click', function() {
+            renderInvestors('All');
+        });
+
+        // Initial render when the page loads
+        renderInvestors('All');
+
+        function submitForm(investor_id) {
+            document.getElementById("inv_id_input").value = investor_id;
+            document.getElementById("profileForm").submit();
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrepreneur Registration</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url("{{ url_for('static', filename='invreg.jpg') }}");
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .registration-container {
+            text-align: left;
+            background-color: #6ba5d7;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 400px;
+            width: 200%;
+            max-width: 800px;
+        }
+
+        h1 {
+            color: black;
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .name-group {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .name-input {
+            width: 30%;
+            margin-top: 5px;
+        }
+
+        label {
+            margin-top: 10px;
+            display: block;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .register-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            color: aliceblue;
+            background-color: lightcoral;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .register-btn:hover {
+            background-color: #02080c;
+        }
+
+        .required-field {
+            color: red;
+            margin-left: 5px;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 5px;
+        }
+
+        .validation-box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 15px;
+            border-radius: 5px;
+            color: #ff4500;
+        }
+
+        .password-mismatch-error {
+            color: red;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="registration-container">
+        <h1>Investor Registration</h1>
+        <form action="/IDataEntry" method="post" onsubmit="return validateForm()">
+            <div class="name-group">
+                <div class="name-input">
+                    <label for="firstname">First Name<span class="required-field">*</span>:</label>
+                    <input type="text" id="firstname" name="firstname" placeholder="John" pattern="[A-Za-z]+" title="Only alphabets are allowed" required>
+                </div>
+
+                <div class="name-input">
+                    <label for="lastname">Last Name<span class="required-field">*</span>:</label>
+                    <input type="text" id="lastname" name="lastname" placeholder="Smith" pattern="[A-Za-z]+" title="Only alphabets are allowed" required>
+                </div>
+            </div>
+
+            <div class="name-input">
+                <label for="email">Email ID<span class="required-field">*</span>:</label>
+                <input type="email" id="email" name="email" placeholder="john@example.com" required>
+            </div>
+
+            <div class="name-input">
+                <label for="password">Password<span class="required-field">*</span>:</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" title="Password must be at least 8 characters, and include at least one uppercase letter, one lowercase letter, one number, and one special character" required>
+            </div>
+
+            <div class="name-input">
+                <label for="confirmPassword">Confirm Password<span class="required-field">*</span>:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+            </div>
+
+            <div class="name-input">
+                <label for="mobileNumber">Mobile Number<span class="required-field">*</span>:</label>
+                <input type="tel" id="mobileNumber" name="mobileNumber" placeholder="Enter your mobile number" pattern="^[6-9]\d{9}$" title="Enter a valid Indian mobile number" required>
+            </div>
+
+            <div class="name-input">
+                <label for="address">Address<span class="required-field">*</span>:</label>
+                <input type="text" id="address" name="address" placeholder="Enter your address" required>
+            </div>
+
+            <div class="name-input">
+                <label for="age">Age<span class="required-field">*</span>:</label>
+                <input type="number" id="age" name="age" placeholder="Enter your age" min="17" max="100" required>
+            </div>
+
+            <div class="name-input">
+                <label for="interests">Interests<span class="required-field">*</span>:</label>
+                <input type="text" id="interests" name="interests" placeholder="Mention Your Areas of Interest" required>
+            </div>
+            <div class="name-input">
+                <label for="budget">Budget<span class="required-field">*</span>:</label>
+                <input type="number" id="budget" name="budget" placeholder="1000000" required>
+            </div>
+            <button type="submit" class="register-btn">Register</button>
+        </form>
+
+        <div id="validation-box" class="validation-box"></div>
+
+        <script>
+            function validateForm() {
+                var firstName = document.getElementById('firstname').value;
+                var lastName = document.getElementById('lastname').value;
+                var email = document.getElementById('email').value;
+                var password = document.getElementById('password').value;
+                var confirmPassword = document.getElementById('confirmPassword').value;
+                var mobileNumber = document.getElementById('mobileNumber').value;
+                var address = document.getElementById('address').value;
+                var age = document.getElementById('age').value;
+                var interest=document.getElementById('interests').value;
+                var budget=document.getElementById('budget').value; // Corrected
+
+                var validationBox = document.getElementById('validation-box');
+                validationBox.innerHTML = ''; // Clear previous messages
+
+                // Validate Name
+                if (!/^[A-Za-z]+$/.test(firstName) || !/^[A-Za-z]+$/.test(lastName)) {
+                    validationBox.innerHTML += '<p class="error-message">Name should contain only alphabets.</p>';
+                }
+
+                // Validate Email
+                if (!/^\S+@\S+\.\S+$/.test(email)) {
+                    validationBox.innerHTML += '<p class="error-message">Enter a valid email address.</p>';
+                }
+
+                // Validate Password
+                if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password)) {
+                    validationBox.innerHTML += '<p class="error-message">Password must be at least 8 characters and include at least one uppercase letter, one lowercase letter, one number, and one special character.</p>';
+                }
+
+                if (password !== confirmPassword) {
+                    validationBox.innerHTML += '<p class="password-mismatch-error">Passwords do not match.</p>';
+                }
+
+                // Validate Mobile Number
+                if (!/^[6-9]\d{9}$/.test(mobileNumber)) {
+                    validationBox.innerHTML += '<p class="error-message">Enter a valid Indian mobile number.</p>';
+                }
+
+                // Validate Age
+                if (age < 17 || age > 100) {
+                    validationBox.innerHTML += '<p class="error-message">Age should be between 17 and 100.</p>';
+                }
+                if (budget < 10000 ){
+                    validationBox.innerHTML += '<p class="error-message">Budget must be more than 10000.</p>';
+                }
+
+                // If there are validation errors, prevent form submission
+                if (validationBox.innerHTML !== '') {
+                    return false;
+                }
+
+                return true;
+            }
+        </script>
+    </div>
+</body>
+</html>

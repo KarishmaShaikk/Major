@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/zoom.js/2.3.2/zoom.css">
+    <style>
+        body {
+            background-color: #89a6a1;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .profile {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .profile-details {
+            background-color: #d9eee9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+        }
+
+        .profile-details h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .profile-details p {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .profile-details span {
+            font-weight: bold;
+            color: #010a15;
+        }
+
+        .btn-primary {
+            background-color: #5f948a;
+            color: #0c0000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .btn-primary:hover {
+            background-color: #147e67;
+        }
+
+        .profile-image {
+            max-height: 200px;
+            width: auto;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile">
+        <div class="profile-details">
+            <h2>Name: <span id="name">{{ entrepreneurs.firstname }}</span></h2>
+            <p>Contact: <span id="contact">{{ entrepreneurs.mobileNumber }}</span></p>
+            <p>Email: <span id="email">{{ entrepreneurs.email }}</span></p>
+            <p>Problem Statement: <span id="age">{{ entrepreneurs.problemStatement }}</span></p>
+            <p>Age: <span id="ages">{{ entrepreneurs.age }}</span></p>
+            <p>Location: <span id="location">{{ entrepreneurs.address }}</span></p>
+            <p>Budget: <span id="budget">{{ entrepreneurs.budget }}</span></p>
+            <p>Company Website: <span id="website">{{ entrepreneurs.companyWebsite }}</span></p>
+
+            <!-- Profile Image -->
+            {% if image_url %}
+                <img src="{{ image_url }}" alt="Profile Image" class="profile-image">
+            {% endif %}
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zoom.js/2.3.2/zoom.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            new ZoomImage.default(document.querySelector('.profile-image'));
+        });
+    </script>
+</body>
+</html>

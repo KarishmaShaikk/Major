@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="../static/EProfile.css">
+</head>
+<body>
+    <div class="profile">
+
+
+        <div class="profile-details">
+            <h2>Name: <span id="name">{{ person.name }}</span></h2>
+            <p>Contact: <span id="contact">{{ person.contact }}</span></p>
+            <p>Email: <span id="email">{{ person.email }}</span></p>
+            <p>Problem Statement: <span id="age">{{ person.probStmt }}</span></p>
+            <p>Age: <span id="ages">{{ person.age }}</span></p>
+            <p>Location: <span id="location">{{ person.address }}</span></p>
+            <p>Budget: <span id="budget">{{ person.budget }}</span></p>
+            <p>Company Website: <span id="website">{{ person.website }}</span></p>
+
+               <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <button type="submit">Upload</button>
+    </form>
+
+    <!--<img src="{{ url }}" alt="Uploaded Image">-->
+         <!--  {% if fname %}
+                <div class="col-lg-2"></div>
+                <div class = "col-lg-4">
+                <img src="{{ fname }}" alt="Image" style="height:500px ;width:700px ;">
+                </div>
+           {% endif %}>-->
+        {% if person.image_url %}
+                <img src="{{ person.image_url }}" alt="Profile Image">
+                <form action="/delete_image" method="post">
+                    <input type="hidden" name="image_url" value="{{ person.image_url }}">
+                    <button type="submit">Delete Image</button>
+                </form>
+            {% endif %}
+
+
+        </div>
+    </div>
+</body>
+</html>

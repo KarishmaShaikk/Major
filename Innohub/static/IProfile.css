@@ -1,0 +1,44 @@
+/* EProfile.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fdfcd8;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.profile {
+    text-align: center;
+    height: 400px;
+    width: 400px;
+    background-color: rgb(216, 243, 248);
+    padding: 90px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-image img {
+    width: 200px;
+    height: 200px;
+    border-radius: 80%;
+    margin-bottom: 10px;
+}
+
+.profile-details h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.profile-details p {
+    margin: 10px 0;
+}
+
+span[contenteditable="true"] {
+    border: 1px solid #ccc;
+    padding: 5px;
+    display: inline-block;
+    min-width: 150px;
+}

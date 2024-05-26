@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='lean1.css') }}  ">
+    <title>Leancanvas</title>
+</head>
+<body>
+<form action="/post" method="post">
+    <div class="container">
+        <h1 class="text-center">LEAN CANVAS MODEL</h1>
+
+        <div class="row">
+            <div class="col-2 boxes" >
+                <label for="problemStatement">problem</label>
+                <textarea  class ="one" type="text" id="problemStatement" name="problemStatement">{{ chatres.ProblemStatement }}</textarea>
+            </div>
+            <div class="col-3 boxes">
+                <div class="d-flex flex-column">
+                    <div class="topbox">
+                        <label for="solution">Solution</label>
+                        <textarea class="two" type="text" id="solution" name="solution">{{ chatres.Solution }}</textarea>
+                    </div>
+                    <div class="topbox2">
+                        <label for="keyMetrics">Key Metrics</label>
+                         <textarea class ="two" type="text" id="keyMetrics" name="keyMetrics">{%for i in chatres.KeyMetrics%}{{i}}{% endfor %}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2 boxes">
+                <label for="uniqueValueProposition">Unique Value Proposition</label>
+                <textarea class="one" type="text" id="uniqueValueProposition" name="uniqueValueProposition">{%for i in chatres.UniqueValueProposition%}{{i}}{% endfor %}</textarea>
+            </div>
+            <div class="col-3 boxes">
+                <div class="d-flex flex-column">
+                    <div class="topbox">
+                        <label for="unfairAdvantage">Unfair Advantage</label>
+                        <textarea class="two" type="text" id="unfairAdvantage" name="unfairAdvantage">{%for i in chatres.UnfairAdvantage%}{{i}}{% endfor %}</textarea>
+                    </div>
+                    <div class="topbox2">
+                        <label for="channels">Channels</label>
+                        <textarea class="two" type="text" id="channels" name="channels">{%for i in chatres.Channels%}{{i}}{% endfor %}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2 boxes">
+                <label for="customerSegments">Customer Segments</label>
+                        <textarea  class="one" type="text" id="customerSegments" name="customerSegments">{%for i in chatres.CustomerSegments%}{{i}}{% endfor %}</textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 downbox">
+                <div class="row">
+                    <label for="costStructure">Cost Structure</label>
+                </div>
+                <div class="row">
+                <textarea class="three" type="text" id="costStructure" name="costStructure">{%for i in chatres.CostStructure%}{{i}}{% endfor %}</textarea>
+            </div>
+            </div>
+            <div class="col-6 downbox">
+                <div class="row">
+                    <label for="revenueStreams">Revenue Streams</label>
+                </div>
+                <div class="row">
+                <textarea class="three" type="text" id="revenueStreams" name="revenueStreams">{%for i in chatres.RevenueStreams%}{{i}}{% endfor %}</textarea>
+            </div>
+             </div>
+        </div>
+    </div>
+   
+</form>
+<script>
+    //console.log({{ chatres }})
+</script>
+</body>
+</html>

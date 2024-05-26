@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("{{ url_for('static', filename='enthome.avif') }}");
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+        }
+
+        .profile {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: rgba(239, 167, 186, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            padding: 30px;
+        }
+
+       .profile-image img {
+    width: 30%;
+    height: auto;
+
+    display: block; /* Ensure the image is treated as a block element */
+    margin: 0 auto; /* Center the image horizontally */
+}
+
+
+        .profile-details {
+            padding: 20px;
+        }
+
+        .profile-details h2 {
+            font-size: 24px;
+            color: #170101;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .profile-details p {
+            font-size: 18px;
+            color: #150000;
+            margin-bottom: 10px;
+        }
+
+        .profile-details span {
+            font-weight: bold;
+            color: #150101;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile">
+        <div class="profile-image">
+            <img src="{{ url_for('static', filename='pic2.png') }}" alt="Profile Image">
+        </div>
+
+        <div class="profile-details">
+            <h2>Name: <span id="name">{{ investors.firstname }}</span></h2>
+
+            <p>Email: <span id="email">{{ investors.email }}</span></p>
+            <p>Age: <span id="ages">{{ investors.age }}</span></p>
+            <p>Location: <span id="location">{{ investors.address }}</span></p>
+            <p>Budget: <span id="budget">{{ investors.budget }}</span></p>
+            <p>Interests: <span id="interests">{{ investors.interests }}</span></p>
+        </div>
+    </div>
+</body>
+</html>

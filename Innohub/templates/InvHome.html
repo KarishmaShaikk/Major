@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrepreneur's Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("{{ url_for('static', filename='invhome.webp') }}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .welcome-text {
+            margin-left: 20px;
+        }
+
+        .profile-icon {
+            margin-right: 20px;
+        }
+
+        .profile-icon img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+            display: none;
+            float: left;
+            min-width: 160px;
+            padding: .5rem 0;
+            margin: .125rem 0 0;
+            font-size: 1rem;
+            color: #212529;
+            text-align: left;
+            list-style: none;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid rgba(0,0,0,.15);
+            border-radius: .25rem;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-item {
+            display: block;
+            width: 100%;
+            padding: .25rem 1.5rem;
+            clear: both;
+            font-weight: 400;
+            color: #212529;
+            text-align: inherit;
+            white-space: nowrap;
+            background-color: transparent;
+            border: 0;
+            cursor: pointer;
+        }
+
+        .dropdown-item:hover, .dropdown-item:focus {
+            color: #16181b;
+            text-decoration: none;
+            background-color: #f8f9fa;
+        }
+
+        h2, h3 {
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .col-md-4 {
+            flex: 0 0 calc(33.3333% - 1rem);
+            max-width: calc(33.3333% - 1rem);
+            margin-bottom: 10px; /* Reduce margin between cards */
+        }
+
+        .card {
+            border: none;
+            background-color: #9592d2;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            height: 250px;
+            margin-right: 10px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-body {
+            color: #f6f1f1; /* Black text */
+        }
+
+        .btn-success a {
+            color: white !important; /* Set text color to white */
+            text-decoration: none; /* Remove default underline */
+        }
+
+        .btn-success {
+            background-color: #ff69b4; /* Pink background */
+            border-color: #ff69b4; /* Pink border color */
+        }
+
+        .btn-success:hover {
+            background-color: #d94086; /* Darker pink on hover */
+            border-color: #d94086; /* Darker pink border color on hover */
+        }
+
+        .card-title a {
+            color: white !important; /* Set card title color to white */
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="header">
+            <h2 class="welcome-text">WELCOME {{person.name }}!</h2>
+            <div >
+
+            </div>
+        </div>
+        <h2>Wanna connect with Entrepreneurs? Here's who you can talk to!</h2>
+        <div class="flex-container">
+            <div class="dropdown-container">
+                <h3>All Entrepreneurs</h3>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        Filter
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="filterDropdown">
+                        <li><a class="dropdown-item" href="#" id="filterBudget">Budget</a></li>
+                        <li><a class="dropdown-item" href="#" id="filterAll">All</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container mt-4" id="entrepreneur-cards">
+            <!-- Entrepreneur cards will be dynamically added here -->
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Your custom JavaScript -->
+    <script>
+        // Function to render entrepreneur cards based on filter
+        function renderEntrepreneurs(filter) {
+            console.log(filter)
+            var entrepreneurCards = '';
+            console.log(entrepreneurCards)
+            if(filter === 'Budget') {
+                {% for ent_id in entrepreneurs %}
+                    {% if entrepreneurs[ent_id].budget|int <= person.budget|int %}
+                        entrepreneurCards += `
+                        <div class="col-md-4">
+                            <div class="card">
+    <div class="card-body">
+        <h5 class="card-title">
+            <a href="#" onclick="submitForm('{{ ent_id }}')" style="color: white !important;">{{ entrepreneurs[ent_id].firstname }} {{ entrepreneurs[ent_id].lastname }}</a>
+        </h5>
+        <form id="profileForm" action="/IProfile" method="POST" style="display: none;">
+            <input type="hidden" id="ent_id_input" name="ent_id">
+        </form>
+        <p class="card-text">{{ entrepreneurs[ent_id].email }}</p>
+        <p class="card-text"><strong>Interests:</strong> {{ entrepreneurs[ent_id].problemStatement }}</p>
+        <button type="button" class="btn btn-success"><a href="/chatei">Chat</a></button>
+    </div>
+</div>
+
+                        `;
+                    {% endif %}
+                {% endfor %}
+            }
+            else if(filter === 'All') {
+                {% for ent_id in entrepreneurs %}
+                    entrepreneurCards += `
+                        <div class="col-md-4">
+                            <div class="card">
+                                
+                                <div class="card-body">
+                                    <h5 class="card-title"><a href="#" onclick="submitForm('{{ ent_id }}')">{{ entrepreneurs[ent_id].firstname }} {{ entrepreneurs[ent_id].lastname }}</a></h5>
+                                    <form id="profileForm" action="/SEProfile" method="POST" style="display: none;">
+                                        <input type="hidden" id="ent_id_input" name="ent_id">
+                                    </form>
+                                    <p class="card-text">{{ entrepreneurs[ent_id].email }}</p>
+                                    <p class="card-text"><strong>Interests:</strong> {{ entrepreneurs[ent_id].problemStatement }}</p>
+                                    <button type="button" class="btn btn-success"><a href="/chatei">Chat</a></button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                {% endfor %}
+            }
+            document.getElementById('entrepreneur-cards').innerHTML = entrepreneurCards;
+        }
+
+        // Event listener for Budget filter
+        document.getElementById('filterBudget').addEventListener('click', function() {
+            renderEntrepreneurs('Budget');
+        });
+
+        // Event listener for All filter
+        document.getElementById('filterAll').addEventListener('click', function() {
+            console.log("ALLL")
+            renderEntrepreneurs('All');
+        });
+
+        // Initial render when the page loads
+        renderEntrepreneurs('All');
+
+        function submitForm(ent_id) {
+            document.getElementById("ent_id_input").value = ent_id;
+            document.getElementById("profileForm").submit();
+        }
+    </script>
+</body>
+</html>

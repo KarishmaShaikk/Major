@@ -1,0 +1,46 @@
+.boxes 
+{
+    height: 400px;
+    width: 300px;
+    background-color: rgb(213, 236, 253);
+}
+ 
+
+.downbox 
+{
+    height: 200px;
+    background-color: rgb(213, 236, 253);
+}
+.topbox 
+{
+    height: 200px;
+}
+.topbox2 
+{
+    height: 200px;
+}
+
+
+   
+.one{
+    height: 340px;
+    width: 140px;
+}
+.two
+{
+    height: 160px;
+    width: 240px;
+}
+.three{
+    height: 150px;
+    width: 550px;
+   
+   
+}
+.textarea {
+    width: 200px; /* Set the width as needed */
+    height: 100px; /* Set the height as needed */
+    resize: none; /* Disable textarea resizing if necessary */
+  }
+
+

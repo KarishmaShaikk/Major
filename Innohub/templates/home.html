@@ -1,0 +1,89 @@
+{% extends 'base.html' %} 
+{% block content %}
+<form method="post" class="buttons">
+  <h3>Enter The Chat Room</h3>
+  <div>
+    <label>Name:</label>
+    <input
+      type="text"
+      placeholder="Pick a name!"
+      name="name"
+      value="{{name}}"
+    />
+  </div>
+  <div class="join">
+    <input type="text" placeholder="Room Code" name="code" value="{{code}}" />
+    <button type="submit" name="join">Join a Room</button>
+    <button type="submit" name="create" class="create-btn">Create a Room</button>
+  </div>
+  {% if error %}
+  <ul>
+    <li>{{error}}</li>
+  </ul>
+  {% endif %}
+</form>
+
+<style>
+/* Styles for the form */
+.buttons {
+  background-color: #61b1e7; /* Blue background color */
+  padding: 20px;
+  margin-right: 20px;
+  border-radius: 10px;
+  width: 700px;
+  margin: 0 auto;
+}
+
+.buttons h3 {
+  color: white;
+  text-align: center;
+}
+
+.buttons label {
+  color: white;
+}
+
+.buttons input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.8); /* White with transparency */
+}
+
+.buttons input[type="text"]::placeholder {
+  color: #e08f9f; /* Orange placeholder color */
+}
+
+.buttons .join {
+  margin-top: 10px;
+}
+
+/* Styles for the buttons */
+.buttons button {
+  background-color: #e08f9f; /* Green button color */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.buttons button.create-btn {
+  background-color: #e08f9f; /* Orange color for Create button */
+}
+
+/* Styles for error message */
+.buttons ul {
+  list-style: none;
+  padding: 10;
+  margin-top: 10px;
+}
+
+.buttons ul li {
+  color: white;
+}
+</style>
+{% endblock %}

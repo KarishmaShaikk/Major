@@ -1,0 +1,36 @@
+/* ehome.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+button{
+
+    background-color: aliceblue;
+    text-decoration: none;
+}
+
+.content {
+    max-width: 1500px;
+    padding: 5px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.header {
+    position: relative;
+}
+
+.profile-box {
+    position: absolute;
+    top: 10px; /* Adjust the top distance as needed */
+    right: 10px; /* Adjust the right distance as needed */
+}
+
+.profile-box img {
+    width: 60px;
+    height: 70px;
+    border-radius: 80%;
+}

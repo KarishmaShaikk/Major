@@ -1,0 +1,49 @@
+.boxes 
+{
+    height: 300px;
+ 
+}
+.downbox 
+{
+    height: 150px;
+}
+.topbox 
+{
+    height: 150px;
+}
+.topbox2 
+{
+    height: 150px;
+}
+
+   
+input
+{
+    height: 230px;
+    width:  120px;
+}
+
+   
+input
+{
+    height: 230px;
+    width:  120px;
+}
+.two
+{
+    height: 100px;
+    width: 170px;
+}
+.down{
+    height: 100px;
+    width: 440px;
+    padding: 10px;
+}
+
+.scrollabletextbox {
+    height:100px;
+    width:200px;
+    font-family: Verdana, Tahoma, Arial, Helvetica, sans-serif;
+    font-size: 80%;
+    overflow:scroll;
+}

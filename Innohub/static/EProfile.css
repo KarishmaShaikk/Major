@@ -1,0 +1,58 @@
+/* EProfile.css */
+
+.profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #a7b09f; /* Light gray background */
+    padding: 20px; /* Add padding to the profile container */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+}
+
+.profile-image img {
+    width: 20px; /* Adjust size as needed */
+    height: 20px; /* Adjust size as needed */
+    border-radius: 50%; /* Make the image round */
+    object-fit: cover; /* Ensure the image covers the entire space */
+    margin-bottom: 20px; /* Add some space below the image */
+}
+
+.profile-details {
+    text-align: center;
+    margin-bottom: 20px; /* Add some space below the profile details */
+}
+
+.profile-details h2 {
+    margin-bottom: 10px; /* Add some space below the heading */
+    color: black; /* Dark gray text color */
+}
+
+.profile-details p {
+    margin-bottom: 5px; /* Add some space below each paragraph */
+    color: black; /* Medium gray text color */
+}
+
+.form-control {
+    margin-bottom: 10px; /* Add some space below the form control */
+    padding: 8px; /* Add padding to form controls */
+    border: 1px solid #ccc; /* Add border */
+    border-radius: 5px; /* Rounded corners */
+}
+
+.btn {
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.btn-success {
+    background-color: #28a745; /* Green color for success button */
+    color: #fff; /* White text color */
+    border: none; /* Remove border */
+    padding: 10px 20px; /* Add padding */
+    border-radius: 5px; /* Add border radius */
+}
+
+.btn-success:hover {
+    background-color: #218838; /* Darker green color on hover */
+}

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Page</title>
+    <style>
+       body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 10px;
+    background: url("{{ url_for('static', filename='wel1pic.jpg') }}") no-repeat;
+    background-size: cover;
+    opacity: 0;
+    animation: fadeInBackground 2s forwards;
+}
+
+        @keyframes fadeInBackground {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            opacity: 0;
+            animation: fadeInText 2s forwards 1s;
+        }
+
+        .container1 {
+            margin-left: 10px;
+            padding: 20px;
+        }
+
+        .contact-section {
+            margin-top: 150px;
+            color: whitesmoke;
+            text-align: center;
+        }
+
+        .founder-container {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin-top: 20px;
+        }
+
+        .founder-card {
+            padding: 20px;
+            border-radius: 10px;
+            color: whitesmoke;
+            text-align: center;
+            animation: zoomIn 1s ease-out forwards;
+            margin-right: 20px;
+        }
+
+        .founder-card img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .founder-details {
+            text-align: left;
+        }
+
+        .book-container {
+            margin-top: 50px;
+            padding: 70px;
+            margin-left: 10%;
+            width: 25%;
+            margin-bottom: 10%;
+            background-color: lightpink;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            color: black;
+            text-align: -webkit-left;
+            animation: zoomIn 1s ease-out forwards;
+        }
+
+        .book-container a {
+            color: darkblue;
+            text-decoration: none;
+        }
+
+        .book-container a:hover {
+            text-decoration: underline;
+        }
+
+        @keyframes fadeInText {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #3498db;
+            font-size: 3em;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: #fff;
+            margin-top: 20px;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        .login-btn,
+        .signup-btn {
+            cursor: pointer;
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #000000;
+            border-radius: 5px;
+            margin: 0 10px;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+        }
+
+        .login-btn:hover,
+        .signup-btn:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+        }
+
+        .contact-details a {
+            color: beige;
+            text-decoration: underline;
+        }
+
+        .contact-details a:hover {
+            color: #ddd;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Welcome to Innovation Hub!</h1>
+        <div class="buttons">
+            <a href="/Login" class="login-btn">Login</a>
+            <a href="/Register" class="signup-btn">Register</a>
+        </div>
+    </div>
+
+    <div class="container1">
+        <h2>Get Started With Us Today!</h2>
+        <h2>From an Idea to Business, we got it all</h2>
+    </div>
+
+    <!-- Book-like Object Section -->
+    <div class="book-container">
+        <p>Don't know how to begin? Check out the course on Coursera:</p>
+        <a href="https://www.coursera.org/learn/entrepreneur-guide-beginners" target="_blank">Entrepreneurship Guide for Beginners</a>
+    </div>
+
+    <!-- Founder Cards Container -->
+    <h1> Meet Our Founders</h1>
+
+    <div class="founder-container">
+        <div class="founder-card">
+   <div class="profile-image">
+        <img src="{{ url_for('static', filename='sneha.jpg') }}" alt="Profile Image">
+    </div>
+            <div class="founder-details">
+                <h2>Sneha Lakshya</h2>
+                <p>CVR College of Engineering</p>
+            </div>
+        </div>
+
+        <div class="founder-card">
+               <div class="profile-image">
+        <img src="{{ url_for('static', filename='karishma.jpg') }}" alt="Profile Image">
+    </div>
+            <div class="founder-details">
+                <h2>Karishma</h2>
+                <p>CVR College of Engineering</p>
+            </div>
+        </div>
+
+        <div class="founder-card">
+    <div class="profile-image">
+        <img src="{{ url_for('static', filename='praneetha.jpg') }}" alt="Profile Image">
+    </div>
+    <div class="founder-details">
+        <h2>Praneetha</h2>
+        <p>CVR College of Engineering</p>
+    </div>
+</div>
+
+    </div>
+
+    <!-- Contact Details Section -->
+    <div class="contact-section">
+       <p>CONTACT US: Email: <a href="innovationhub@gmail.com" style="color: white;">innovationhub@gmail.com</a> | Phone: <a href="+91 7032281347" style="color: white;"> +917032281347</a></p>
+ </p></div>
